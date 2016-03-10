@@ -1,5 +1,7 @@
 # Juttle Splunk Adapter
 
+[![Build Status](https://travis-ci.org/juttle/juttle-splunk-adapter.svg?branch=master)](https://travis-ci.org/juttle/juttle-splunk-adapter)
+
 [Splunk](http://www.splunk.com/) adapter for the [Juttle data flow
 language](https://github.com/juttle/juttle), with read support.
 
