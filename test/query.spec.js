@@ -2,14 +2,11 @@
 
 var expect = require('chai').expect;
 var utils = require('./utils');
-var _ = require('underscore');
 
 var withAdapterAPI = require('juttle/test').utils.withAdapterAPI;
 
 withAdapterAPI(() => {
     var QueryBuilder = require('../lib/query');
-    /* global JuttleAdapterAPI */
-    var JuttleMoment = JuttleAdapterAPI.types.JuttleMoment;
     var builder = new QueryBuilder();
 
     describe('splunk query building', () => {

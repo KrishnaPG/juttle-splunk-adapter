@@ -1,3 +1,5 @@
+'use strict';
+
 var SemanticPass = require('juttle/lib/compiler/semantic');
 var FilterSimplifier = require('juttle/lib/compiler/filters/filter-simplifier');
 
