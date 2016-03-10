@@ -50,6 +50,18 @@ withAdapterAPI(() => {
             expect(builder.build.bind(builder, filter_ast)).to.throw(/Operator in not supported/);
         });
 
+        describe('full text search', () => {
+            it('unquoted fts - implicit and', () => {
+                var filter_ast = utils.parseFilter('index = "cpu" "one two three"');
+                expect(builder.build(filter_ast)).to.equal('search index = "cpu" AND one two three | sort + _time');
+            });
+
+            it('quoted fts - exact match', () => {
+                var filter_ast = utils.parseFilter('index = "cpu" "\\"cpu1\\""');
+                expect(builder.build(filter_ast)).to.equal('search index = "cpu" AND "cpu1" | sort + _time');
+            });
+        });
+
         describe('optimizations', () => {
             it('head', () => {
                 var filter_ast = utils.parseFilter('index = "cpu"');
