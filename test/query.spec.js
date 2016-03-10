@@ -12,22 +12,22 @@ withAdapterAPI(() => {
     describe('splunk query building', () => {
         it('basic query', () => {
             var filter_ast = utils.parseFilter('index = "cpu"');
-            expect(builder.build(filter_ast)).to.equal('search index = "cpu" | sort - Time');
+            expect(builder.build(filter_ast)).to.equal('search index = "cpu" | sort + _time');
         });
 
         it('implicit AND', () => {
             var filter_ast = utils.parseFilter('name = "cpu1" index="cpu"');
-            expect(builder.build(filter_ast)).to.equal('search name = "cpu1" AND index = "cpu" | sort - Time');
+            expect(builder.build(filter_ast)).to.equal('search name = "cpu1" AND index = "cpu" | sort + _time');
         });
 
         it('OR', () => {
             var filter_ast = utils.parseFilter('name = "cpu1" or index="cpu"');
-            expect(builder.build(filter_ast)).to.equal('search name = "cpu1" OR index = "cpu" | sort - Time');
+            expect(builder.build(filter_ast)).to.equal('search name = "cpu1" OR index = "cpu" | sort + _time');
         });
 
         it('nested binary expressions', () => {
             var filter_ast = utils.parseFilter('(name = "cpu1" or index="cpu") and host = "host1"');
-            expect(builder.build(filter_ast)).to.equal('search (name = "cpu1" OR index = "cpu") AND host = "host1" | sort - Time');
+            expect(builder.build(filter_ast)).to.equal('search (name = "cpu1" OR index = "cpu") AND host = "host1" | sort + _time');
         });
 
         it('missing index throws', () => {
@@ -54,13 +54,13 @@ withAdapterAPI(() => {
             it('head', () => {
                 var filter_ast = utils.parseFilter('index = "cpu"');
                 var opt_info = { head: { limit: 10 } };
-                expect(builder.build(filter_ast, { optimizations: opt_info })).to.equal('search index = "cpu" | sort - Time | head 10');
+                expect(builder.build(filter_ast, { optimizations: opt_info })).to.equal('search index = "cpu" | sort + _time | head 10');
             });
 
             it('tail', () => {
                 var filter_ast = utils.parseFilter('index = "cpu"');
                 var opt_info = { tail: { limit: 10 } };
-                expect(builder.build(filter_ast, { optimizations: opt_info })).to.equal('search index = "cpu" | sort - Time | tail 10');
+                expect(builder.build(filter_ast, { optimizations: opt_info })).to.equal('search index = "cpu" | sort + _time | tail 10');
             });
         });
     });
