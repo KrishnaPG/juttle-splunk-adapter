@@ -3,6 +3,14 @@
 This file documents all notable changes to Juttle Splunk Adapter. The release
 numbering uses [semantic versioning](http://semver.org).
 
+## 0.1.2
+
+Released 2016-03-11
+
+- Fixed default sorting on time.
+
+- Fixed full text search.
+
 ## 0.1.1
 
 Released 2016-03-10
